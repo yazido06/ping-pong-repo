@@ -1,7 +1,7 @@
 replicaCount: 2
 
 image:
-  repository: ghcr.io/yazido06/ping-pong/ping-pong-api
+  repository: ghcr.io/yazido06/ping-pong-repo/ping-pong-api
   tag: 9ac628abebfcf7b766e88a1b81d939361161c500
   pullPolicy: IfNotPresent
 

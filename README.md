@@ -259,7 +259,7 @@ terraform output dns_nameservers
 cd kubernetes/helm/ping-pong
 helm upgrade --install ping-pong . \
   --set image.tag=latest \
-  --set image.repository=ghcr.io/yourusername/ping-pong/ping-pong-api \
+  --set image.repository=ghcr.io/yourusername/ping-pong-repo/ping-pong-api \
   --namespace ping-pong \
   --create-namespace
 ```
