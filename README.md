@@ -274,3 +274,4 @@ helm upgrade --install ping-pong . \
   kubectl get svc -n ingress-nginx
   ```
 - Test HTTP and HTTPS access to your domain.
+
