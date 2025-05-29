@@ -1,0 +1,30 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "ping-pong.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    {{- include "ping-pong.labels" . | nindent 4 }}
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    external-dns.alpha.kubernetes.io/owner-id: ping-pong
+    external-dns.alpha.kubernetes.io/txt-owner-id: ping-pong
+spec:
+  tls:
+  - hosts:
+    - {{ .Values.ingress.host }}
+    secretName: {{ include "ping-pong.fullname" . }}-tls
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ include "ping-pong.fullname" . }}
+            port:
+              number: {{ .Values.service.port }} 

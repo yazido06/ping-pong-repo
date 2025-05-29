@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  dev:
+    build:
+      context: .
+      dockerfile: docker/dev.Dockerfile
+      args:
+        TERRAFORM_VERSION: ${TERRAFORM_VERSION:-1.12.1}
+        KUBECTL_VERSION: ${KUBECTL_VERSION:-1.33.0}
+        HELM_VERSION: ${HELM_VERSION:-3.18.0}
+    env_file:
+      - .env
+    volumes:
+      - .:/workspace
+      - ~/.config/gcloud:/home/devuser/.config/gcloud
+      - ~/.kube/ping-pong:/home/devuser/.kube
+      - ~/.docker:/home/devuser/.docker
+    environment:
+      - DOCKER_HOST=unix:///var/run/docker.sock
+    tty: true
+    stdin_open: true 
+
+
+    
